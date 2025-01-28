@@ -8,12 +8,30 @@
   </head>
   <body>
     <main>
-      <h2>Calendario 2025 con Recordatorios</h2>
+      <h3>Calendario 2025 con Recordatorios</h3>
+      <label for="elegirMes">Mes:</label>
+      <select style="margin-bottom: 1rem;" id="elegirMes" aria-label="Selecciona un mes">
+        <option value="0">Enero</option>
+        <option value="1">Febrero</option>
+        <option value="2">Marzo</option>
+        <option value="3">Abril</option>
+        <option value="4">Mayo</option>
+        <option value="5">Junio</option>
+        <option value="6">Julio</option>
+        <option value="7">Agosto</option>
+        <option value="8">Septiembre</option>
+        <option value="9">Octubre</option>
+        <option value="10">Noviembre</option>
+        <option value="11">Diciembre</option>
+      </select>
+      <div class="calendario"></div>
+
       <div class="cards">
+        <!-- Card para agregar recordatorios -->
         <div class="card">
-            <h2 style="font-size: 1.3rem;">Agregar Recordatorio</h2>
+          <h2>Agregar Recordatorio</h2>
           <label for="mes">Mes:</label>
-          <select id="mes">
+          <select id="mes" aria-label="Selecciona un mes">
             <option value="0">Enero</option>
             <option value="1">Febrero</option>
             <option value="2">Marzo</option>
@@ -28,28 +46,28 @@
             <option value="11">Diciembre</option>
           </select>
           <label for="dia">Día:</label>
-          <input type="number" id="dia" min="1" max="31" placeholder="Ej: 15" />
+          <input type="number" id="dia" min="1" max="31" placeholder="Ej: 15" aria-label="Ingresa el día" />
           <label for="recordatorio">Recordatorio:</label>
-          <input
-            type="text"
-            id="recordatorio"
-            placeholder="Ej: Cumpleaños de Juan"
-          />
-          <div style="display: flex; gap: 1rem">
+          <input type="text" id="recordatorio" placeholder="Ej: Cumpleaños de Juan" aria-label="Descripción del recordatorio" />
+          <div class="button-group">
             <button id="agregar">Agregar Recordatorio</button>
-            <button id="borrar">borrar Recordatorio</button>
+            <button id="borrar">Borrar Recordatorio</button>
           </div>
         </div>
+
+        <!-- Card para mostrar recordatorios -->
         <div class="card">
           <div class="recordatorios">
-            <h2 style="font-size: 1.3rem;">Todos los Recordatorios</h3>
+            <h2>Todos los Recordatorios</h2>
             <div id="lista-recordatorios"></div>
-            <!-- <button id="importar">Importar Datos</button> -->
           </div>
         </div>
+
+        <!-- Card para exportar e importar recordatorios -->
         <div class="card">
-            <h2 style="font-size: 1rem;">Exportar e Importar Recuerdos</h2>
+          <h2>Exportar e Importar Recordatorios</h2>
           <button id="exportar">Exportar Datos</button>
+          <label for="importarJSON">Importar Datos:</label>
           <input type="file" id="importarJSON" accept=".json" />
         </div>
       </div>

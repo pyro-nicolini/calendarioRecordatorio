@@ -45,6 +45,51 @@ let year2025 = [
     });
   }
 
+// Función para calcular los días de la semana para un año dado
+function asignarDiasSemana(año, yearData) {
+  const diasSemana = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+
+  yearData.forEach((mes, index) => {
+    mes.dias.forEach((dia) => {
+      const fecha = new Date(año, index, dia.numeroDia);
+      dia.nombreDia = diasSemana[fecha.getDay()]; // Asignar el día de la semana
+    });
+  });
+}
+
+// Llamada inicial para 2025
+asignarDiasSemana(2025, year2025);
+guardarEnLocalStorage(year2025);
+
+// Función para mostrar el calendario de un mes específico
+function mostrarCalendarioMes(mesIndex) {
+  const contenedorCalendario = document.querySelector(".calendario");
+  contenedorCalendario.innerHTML = ""; // Limpiar el calendario actual
+
+  const mes = year2025[mesIndex];
+  mes.dias.forEach((dia) => {
+    const diaElemento = document.createElement("div");
+    diaElemento.className = "box";
+    diaElemento.textContent = `${dia.numeroDia} (${dia.nombreDia}) ${dia.recordatorios.join(", ")}`;
+    console.log(dia.nombreDia);
+    contenedorCalendario.appendChild(diaElemento);
+  });
+}
+
+
+// Evento para cambiar el mes desde el selector
+document.getElementById("elegirMes").addEventListener("change", (e) => {
+  const mesSeleccionado = parseInt(e.target.value);
+  mostrarCalendarioMes(mesSeleccionado);
+});
+
+
+
+
+// Mostrar el primer mes por defecto
+mostrarCalendarioMes(0);
+  
+
   function exportarDatos() {
     const data = JSON.stringify(year2025, null, 2);
     const blob = new Blob([data], { type: "application/json" });
@@ -59,6 +104,7 @@ let year2025 = [
     reader.onload = () => {
       try {
         year2025 = JSON.parse(reader.result);
+        asignarDiasSemana(2025, year2025); // Recalcular los días de la semana
         guardarEnLocalStorage(year2025);
         mostrarRecordatorios();
         alert("Datos importados correctamente.");
@@ -68,7 +114,7 @@ let year2025 = [
     };
     reader.readAsText(file);
   }
-
+  
   document.getElementById("agregar").addEventListener("click", () => {
     const mes = parseInt(document.getElementById("mes").value);
     const dia = parseInt(document.getElementById("dia").value);
