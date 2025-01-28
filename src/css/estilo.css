@@ -220,11 +220,12 @@ span {
 
 
 .calendario {
-  height: 400px;
+  height: 500px;
   display: grid;
   width: 90%;
   grid-template-columns: repeat(7, 1fr);
-  gap: 2px;
+  gap: 1px;
+  margin-bottom: 1rem;
 }
 
 .box {
@@ -234,5 +235,17 @@ span {
   text-align: center;
   border: 2px solid #6600ffa2;
   border-radius: 5px;
-  background-color: hsla(0, 0%, 100%, 0.634);
+  background-color: hsla(23, 56%, 74%, 0.85);
+  height: max-content;
+  min-height: 4rem;
+}
+
+.recordar {
+  color: #8102ff;
+  font-weight: 600;
+}
+
+li {
+  background-color: #ffd30e94;
+  margin: .5rem 0;
 }

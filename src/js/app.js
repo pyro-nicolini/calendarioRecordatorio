@@ -13,6 +13,37 @@ let year2025 = [
     { mes: "Diciembre", dias: Array.from({ length: 31 }, (_, i) => ({ numeroDia: i + 1, recordatorios: [] })) },
   ];
   
+
+  function mostrarCalendarioMes(mesIndex) {
+    const contenedorCalendario = document.querySelector(".calendario");
+    contenedorCalendario.innerHTML = ""; // Limpiar el calendario actual
+  
+    const mes = year2025[mesIndex];
+    mes.dias.forEach((dia, diaIndex) => {
+      const diaElemento = document.createElement("div");
+      diaElemento.className = "box";
+      diaElemento.innerHTML = `
+        ${dia.numeroDia} (${dia.nombreDia}) 
+        ${dia.recordatorios.map((rec, recIndex) => 
+          `<li>${rec} <a style='cursor: pointer; color: red' onclick='borrarEsteRecordatorio(${mesIndex}, ${diaIndex}, ${recIndex})'>X</a></li>`
+        ).join(" ")}
+      `;
+  
+      if (dia.recordatorios.length > 0) {
+        diaElemento.classList.add("recordar");
+      }
+      contenedorCalendario.appendChild(diaElemento);
+    });
+  }
+  
+  function borrarEsteRecordatorio(mesIndex, diaIndex, recIndex) {
+    year2025[mesIndex].dias[diaIndex].recordatorios.splice(recIndex, 1); // Elimina el recordatorio
+    guardarEnLocalStorage(year2025); // Guarda los cambios
+    mostrarCalendarioMes(mesIndex); // Actualiza el calendario del mes actual
+    mostrarRecordatorios();
+    mostrarCalendarioMes(0);
+  }
+
   function cargarDesdeLocalStorage() {
     const data = localStorage.getItem("calendario2025");
     return data ? JSON.parse(data) : year2025;
@@ -28,6 +59,7 @@ let year2025 = [
     diaObj.recordatorios.push(tarea);
     guardarEnLocalStorage(year2025); // 
     mostrarRecordatorios();
+    mostrarCalendarioMes(0);
   }
 
   function mostrarRecordatorios() {
@@ -61,21 +93,6 @@ function asignarDiasSemana(año, yearData) {
 asignarDiasSemana(2025, year2025);
 guardarEnLocalStorage(year2025);
 
-// Función para mostrar el calendario de un mes específico
-function mostrarCalendarioMes(mesIndex) {
-  const contenedorCalendario = document.querySelector(".calendario");
-  contenedorCalendario.innerHTML = ""; // Limpiar el calendario actual
-
-  const mes = year2025[mesIndex];
-  mes.dias.forEach((dia) => {
-    const diaElemento = document.createElement("div");
-    diaElemento.className = "box";
-    diaElemento.textContent = `${dia.numeroDia} (${dia.nombreDia}) ${dia.recordatorios.join(", ")}`;
-    console.log(dia.nombreDia);
-    contenedorCalendario.appendChild(diaElemento);
-  });
-}
-
 
 // Evento para cambiar el mes desde el selector
 document.getElementById("elegirMes").addEventListener("change", (e) => {
@@ -107,6 +124,7 @@ mostrarCalendarioMes(0);
         asignarDiasSemana(2025, year2025); // Recalcular los días de la semana
         guardarEnLocalStorage(year2025);
         mostrarRecordatorios();
+        mostrarCalendarioMes(0); // Renderizar el calendario del mes actual después de importar
         alert("Datos importados correctamente.");
       } catch (error) {
         alert("Error al importar el archivo. Asegúrate de que sea un archivo JSON válido.");
@@ -114,6 +132,7 @@ mostrarCalendarioMes(0);
     };
     reader.readAsText(file);
   }
+  
   
   document.getElementById("agregar").addEventListener("click", () => {
     const mes = parseInt(document.getElementById("mes").value);
@@ -148,6 +167,7 @@ mostrarCalendarioMes(0);
     diaObj.recordatorios.pop();
     guardarEnLocalStorage(year2025);
     mostrarRecordatorios();
+    mostrarCalendarioMes(0);
   }
 
   document.getElementById("borrar").addEventListener("click", () => {
