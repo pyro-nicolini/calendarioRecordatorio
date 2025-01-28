@@ -12,27 +12,46 @@ let year2025 = [
     { mes: "Noviembre", dias: Array.from({ length: 30 }, (_, i) => ({ numeroDia: i + 1, recordatorios: [] })) },
     { mes: "Diciembre", dias: Array.from({ length: 31 }, (_, i) => ({ numeroDia: i + 1, recordatorios: [] })) },
   ];
-  
 
   function mostrarCalendarioMes(mesIndex) {
     const contenedorCalendario = document.querySelector(".calendario");
     contenedorCalendario.innerHTML = ""; // Limpiar el calendario actual
-  
     const mes = year2025[mesIndex];
+    const diasSemana = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
+    const primerDiaSemana = diasSemana.indexOf(mes.dias[0].nombreDia);
+    
+    // Agregar elementos vacíos para los días anteriores al primer día del meswww
+    for (let i = 0; i < primerDiaSemana; i++) {
+      const diaVacio = document.createElement("div");
+      diaVacio.className = "box empty";
+      contenedorCalendario.appendChild(diaVacio);
+    }
+    
+    // Agregar los días del mes con su contenido
     mes.dias.forEach((dia, diaIndex) => {
       const diaElemento = document.createElement("div");
-      diaElemento.className = "box";
+      const diaElementoBox = document.createElement("div");
+      diaElementoBox.className = "box-day";
+      diaElementoBox.innerHTML = `${dia.numeroDia} (${dia.nombreDia})`;
+      if (dia.nombreDia == 'Domingo') {
+        diaElemento.className = "box domingo";
+      } else {
+        diaElemento.className = "box";
+      }
       diaElemento.innerHTML = `
-        ${dia.numeroDia} (${dia.nombreDia}) 
-        ${dia.recordatorios.map((rec, recIndex) => 
-          `<li>${rec} <a style='cursor: pointer; color: red' onclick='borrarEsteRecordatorio(${mesIndex}, ${diaIndex}, ${recIndex})'>X</a></li>`
-        ).join(" ")}
-      `;
-  
+      ${dia.recordatorios
+        .map(
+          (rec, recIndex) =>
+            `<li>${rec} <a style='cursor: pointer; color: red' onclick='borrarEsteRecordatorio(${mesIndex}, ${diaIndex}, ${recIndex})'>X</a></li>`
+        )
+        .join(" ")}
+        `;
       if (dia.recordatorios.length > 0) {
         diaElemento.classList.add("recordar");
       }
-      contenedorCalendario.appendChild(diaElemento);
+      diaElementoBox.appendChild(diaElemento);
+      contenedorCalendario.appendChild(diaElementoBox);
+      diaElemento.setAttribute("data-recordatorios", dia.recordatorios.join(", "));
     });
   }
   
@@ -65,12 +84,18 @@ let year2025 = [
   function mostrarRecordatorios() {
     const lista = document.getElementById("lista-recordatorios");
     lista.innerHTML = "";
-    year2025.forEach((mes) => {
-      mes.dias.forEach((dia) => {
+    year2025.forEach((mes, mesIndex) => {
+      mes.dias.forEach((dia, diaIndex) => {
         if (dia.recordatorios.length > 0) {
-          const item = document.createElement("div");
+          const item = document.createElement("li");
           item.className = "recordatorio";
-          item.textContent = `Día ${dia.numeroDia} de ${mes.mes}: ${dia.recordatorios.join(", ")}`;
+          item.textContent = `Día ${dia.numeroDia} de ${mes.mes}: ${dia.recordatorios.join(", ")} `;
+          const link = document.createElement("a");
+          link.textContent = "X";
+          link.style.cursor = "pointer";
+          link.style.color = "red";
+          link.onclick = () => borrarEsteRecordatorio(mesIndex, diaIndex, dia.recordatorios.length - 1);
+          item.appendChild(link);
           lista.appendChild(item);
         }
       });
@@ -93,19 +118,14 @@ function asignarDiasSemana(año, yearData) {
 asignarDiasSemana(2025, year2025);
 guardarEnLocalStorage(year2025);
 
-
 // Evento para cambiar el mes desde el selector
 document.getElementById("elegirMes").addEventListener("change", (e) => {
   const mesSeleccionado = parseInt(e.target.value);
   mostrarCalendarioMes(mesSeleccionado);
 });
 
-
-
-
 // Mostrar el primer mes por defecto
 mostrarCalendarioMes(0);
-  
 
   function exportarDatos() {
     const data = JSON.stringify(year2025, null, 2);
@@ -132,7 +152,6 @@ mostrarCalendarioMes(0);
     };
     reader.readAsText(file);
   }
-  
   
   document.getElementById("agregar").addEventListener("click", () => {
     const mes = parseInt(document.getElementById("mes").value);

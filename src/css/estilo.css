@@ -1,43 +1,35 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-/* Estilos para móvil */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap");
+
 body {
   font-family: "Poppins";
   color: #eeeeee;
-  display: grid;
-  grid-template-areas:
-    "header"
-    "main"
-    "footer";
-  grid-template-columns: 1fr;
-  grid-template-rows: auto 1fr auto;
-  height: 100vh;
+  min-height: 100vh;
   margin: 0;
   width: 100%;
   text-align: center;
-}
-
-p {
-  font-size: .7rem;
-}
-
-div {
-  font-size: .7rem;
-}
-
-input,
-select {
-  text-align: center;
+  background: radial-gradient(#6f039d, #320177, rgb(0, 0, 0));
 }
 
 main {
-  grid-area: main;
   display: flex;
-  justify-content: center;
+  justify-content: end;
   align-items: center;
-  flex-direction: column;
+  gap: 1rem;
   width: 100%;
-  background: radial-gradient(#6f039d, #320177, rgb(0, 0, 0));
   padding-bottom: 3rem;
+  height: 1fr;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+section {
+  width: max-content;
+  margin: 1rem;
+}
+
+p,
+div {
+  font-size: 0.7rem;
 }
 
 h2 {
@@ -54,148 +46,55 @@ h2 {
   }
 }
 
-
 .cards {
-    width: 800px;
-      padding: 1rem 0;
-      padding-right: 0.5rem;
-      padding-left: 0.5rem;
-      display: grid;
-      align-items: center;
-      justify-content: space-evenly;
-      grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-      gap: 3rem;
-    }
-    
-    .card {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 0 1rem;
-      padding-bottom: 2rem;
-      border-radius: 1rem;
-      border: 1px solid rgba(255, 255, 255, 0.348);
-      background: linear-gradient(#7700ff, #005eff 160%);
-    }
-
-strong {
-  padding: 0;
-  margin: 0;
+  width: fit-content;
+  margin-top: 6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, .5fr));
+  gap: 3rem;
 }
 
-button,
-select,
-input,
-option {
-  border: 1px solid white !important;
-  color: white;
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 1.1rem;
-  width: 70%;
-  font-size: .8rem;
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: fit-content;
+  padding: 1rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.348);
+  background: linear-gradient(#7700ff, #005eff 160%);
+  width: 100%;
 }
 
 button {
   margin: 1rem 0;
-  padding: .8rem;
-  background: radial-gradient(
-    rgba(204, 0, 255, 0.808),
-    rgba(109, 38, 251, 0.515)
-  );
-  transition: all .5s ease-in-out;
+  padding: 0.8rem;
+  background: radial-gradient(rgba(204, 0, 255, 0.808), rgba(109, 38, 251, 0.515));
+  border: 2px white dotted;
+  border-radius: 4px;
+  cursor: pointer;
+  color: white;
+  font-size: 0.8rem;
+  transition: all 0.5s ease-in-out;
 }
 button:hover {
-  background: radial-gradient(
-    rgba(109, 38, 251, 0.515),
-    rgba(47, 0, 255, 0.808)
-  );
-}
-
-select {
-  text-align: center !important;
-  background: radial-gradient(
-    rgba(107, 36, 249, 0.349),
-    rgba(98, 9, 146, 0.885)
-  );
-}
-select:hover {
-  background-color: #5f0eff;
+  background: radial-gradient(rgba(109, 38, 251, 0.515), rgba(47, 0, 255, 0.808));
 }
 
 input {
+  text-align: center;
+  background: radial-gradient(rgba(84, 17, 131, 0.515), rgba(68, 8, 121, 0.808));
   color: #ffffff;
-  text-align: center !important;
-  background: radial-gradient(
-    rgba(84, 17, 131, 0.515),
-    rgba(68, 8, 121, 0.808)
-  );
   font-weight: 600;
 }
 
 input::placeholder {
-  font-weight: 100;
-  color: #ffffff8c; /* Celeste flúor */
-  opacity: 1; /* Si deseas que tenga opacidad completa */
-}
-
-option {
-  text-align: start;
-  background-color: #6e0bac;
-  color: white;
-}
-
-
-@media (min-width: 576px) {
-  body {
-    grid-template-areas:
-      "header header"
-      "main main"
-      "footer footer";
-    grid-template-columns: auto 1fr;
-    grid-template-rows: auto 1fr auto;
-  }
-
-  .items {
-    flex: 1;
-    overflow-y: auto;
-  }
-}
-
-#myChart {
-  border: 1px solid rgba(255, 255, 255, 0.348);
-  background: linear-gradient(#7e35d0, #0c3d92 160%);
-  box-shadow: 0px 0px 10px 0px #005eff;
-  width: 80%;
-  height: 20rem;
-  padding: 1rem;
-  color: white;
-}
-
-canvas {
-  color: white !important;
-}
-
-span {
-  display: flex;
-  flex-direction: column;
-  font-size: 1.3rem;
-  padding: 0;
-  margin: 0;
-  color: white;
-}
-
-#result {
-  font-size: 2rem;
-  padding: 0;
-  margin: 0;
-  margin-bottom: 2rem;
-  color: white;
-  text-shadow: 0px 0px 10px #007bff, -4px -4px 20px #109bc6;
+  color: #ffffff8c;
 }
 
 .spinner {
@@ -206,7 +105,7 @@ span {
   border-radius: 50%;
   width: 15px;
   height: 15px;
-  animation: spin .3s linear infinite;
+  animation: spin 0.3s linear infinite;
 }
 
 @keyframes spin {
@@ -218,34 +117,68 @@ span {
   }
 }
 
-
 .calendario {
   height: 500px;
   display: grid;
-  width: 90%;
+  width: 100%;
   grid-template-columns: repeat(7, 1fr);
-  gap: 1px;
-  margin-bottom: 1rem;
+  gap: .5rem;
+  margin: 1rem;
+  margin-bottom: 5rem;
+  text-transform: uppercase;
 }
 
 .box {
-  color: rgb(68, 0, 255);
-  font-size: .5rem;
-  padding: 10px;
+  background-color: rgba(255, 200, 133, 0.649);
+  color: rgb(37, 37, 37);
+  font-size: 1rem;
+  padding: 1rem;
   text-align: center;
   border: 2px solid #6600ffa2;
   border-radius: 5px;
-  background-color: hsla(23, 56%, 74%, 0.85);
-  height: max-content;
-  min-height: 4rem;
-}
-
-.recordar {
-  color: #8102ff;
-  font-weight: 600;
+  min-height: 3rem;
+  width: 8rem;
 }
 
 li {
+  text-transform: capitalize;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: #ffd30e94;
-  margin: .5rem 0;
+  margin: 0.2rem;
+  padding: 0.05rem;
+  font-size: .7rem;
+  width: fit-content;
+}
+
+a{
+  font-size: .9rem;
+  font-weight: 600;
+  padding-left: .5rem;
+}
+
+#result {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: white;
+  text-shadow: 0px 0px 10px #007bff, -4px -4px 20px #109bc6;
+}
+
+.empty {
+  background-color: rgba(128, 128, 128, 0);
+  border: none;
+}
+
+.domingo {
+  background-color: rgba(255, 81, 81, 0.647);
+}
+
+option, select, input, textarea  {
+  text-align: start;
+  background-color: #e24f00;
+  color: white;
+  padding: .5rem;
+  text-align: center;
+  border-radius: 10px;
 }
