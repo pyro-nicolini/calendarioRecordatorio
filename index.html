@@ -7,25 +7,28 @@
   <link rel="stylesheet" href="src/css/estilo.css">
 </head>
 <body>
-  <h1>Calendario de Recordatorios 2024</h1> 
+  <h1>Calendario de Recordatorios 2025</h1> 
   <div id="app">
     <div id="calendar">
       <div id="month-selector">
         <button id="prev-month">‹</button>
-        <span id="current-month">Enero 2024</span>
+        <strong id="current-month">Enero 2025</strong>
         <button id="next-month">›</button>
       </div>
       <div id="calendar-grid"></div>
     </div>
-      <div id="reminder-form">
-        <input type="date" id="reminder-date">
-        <input type="text" id="reminder-text" placeholder="Agregar recordatorio...">
-        <button id="add-reminder">Añadir Recordatorio</button>
-        <div id="reminder-list">
-          <h2>Lista de Recordatorios</h2>
-          <ul id="reminders"></ul>
-        </div>
+    <div id="reminder-form">
+      <input type="date" id="reminder-date">
+      <input type="text" id="reminder-text" placeholder="Agregar recordatorio...">
+      <button id="add-reminder">Añadir Recordatorio</button>
+      <button id="export-reminders">Exportar Recordatorios</button>
+      <button id="import-reminders">Importar Recordatorios</button>
+      <div id="reminder-list">
+        <h2>Lista de Recordatorios</h2>
+        <ul id="reminders"></ul>
       </div>
+    </div>
+  </div>
   <script src="src/js/app.js"></script>
 </body>
 </html>
