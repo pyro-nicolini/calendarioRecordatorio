@@ -3,18 +3,18 @@
   --color-primary: #9942e5;
   --color-secondary: #cb68f5;
   --color-accent: #5930ed;
-  --color-background: radial-gradient(var(--color-primary), var(--color-secondary), var(--color-accent));
+  --color-background: linear-gradient(rgb(45, 76, 149),rgb(78, 9, 138), rgb(134, 1, 134));
   --color-text: rgb(255, 247, 198);
-  --color-button: linear-gradient(rgb(233, 37, 255), rgb(62, 3, 201));
-  --color-button-hover: linear-gradient(rgb(214, 0, 150), rgb(37, 0, 124));
+  --color-button: linear-gradient(rgb(233, 37, 255), rgb(117, 59, 252));
+  --color-button-hover: linear-gradient(rgb(161, 49, 127), rgb(88, 42, 195));
   --color-day-bg: #fbe8db;
   --color-day-hover: #c0acfe;
   --color-selected-day: #ffe69d;
-  --color-reminder-bg: linear-gradient(#b6b428, #d7d531, #afaf46);
+  --color-reminder-bg: linear-gradient(#e9e778, #f4f473);
   --color-reminder-list-bg: linear-gradient(#fefdce, #ffd493);
-  --color-past: #ff6b6b;
+  --color-past: #fd9797;
   --color-present: linear-gradient(rgb(255, 255, 180), rgb(177, 177, 0));
-  --color-future: linear-gradient(rgb(111, 244, 150), rgb(31, 210, 80));
+  --color-future: linear-gradient(rgb(134, 227, 174), rgb(221, 252, 158));
   --border-radius: 10px;
   --box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
   --transition: all 0.1s ease-in-out;
@@ -28,7 +28,7 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Poppins', sans-serif !important;
   background: var(--color-background);
   width: 100%;
   min-height: 100vh;
@@ -42,7 +42,10 @@ body {
 h1 {
   text-align: center;
   margin: 2rem 0;
-  color: var(--color-text);
+  padding: .5rem 1rem;
+  border-radius: var(--border-radius);
+  background-color: rgb(250, 221, 153);
+  color: #1566ad;
 }
 
 #app {
@@ -125,28 +128,36 @@ h1 {
   gap: 10px;
 }
 
+input[type="date"] {
+  font-size: 1.5rem;
+  text-align: center;
+}
+input[type="text"] {
+  font-size: 1.3rem;
+}
+
 input[type="date"],
 input[type="text"] {
-  background: linear-gradient(#8769ff, hsl(248, 82%, 61%));
+  background: linear-gradient(#3688e7, hsl(234, 82%, 58%));
   color: var(--color-text);
-  border: 2px solid rgb(169, 0, 211);
+  border: 2px solid rgb(255, 255, 255);
   padding: 10px;
   border-radius: var(--border-radius);
-  font-size: 1rem;
   width: 100%;
 }
 
 input::placeholder {
   color: var(--color-text);
-  opacity: 1;
+  opacity: .6;
   font-style: italic;
 }
+
 
 button {
   background: var(--color-button);
   padding: 0.7rem;
   color: var(--color-text);
-  border: 2px solid rgb(86, 0, 161);
+  border: 2px solid rgb(211, 161, 255);
   border-radius: var(--border-radius);
   cursor: pointer;
   font-size: 1rem;
@@ -154,28 +165,36 @@ button {
   text-transform: uppercase;
   transition: var(--transition);
 }
+button#add-reminder {
+  background: linear-gradient(rgb(49, 185, 37),rgb(15, 156, 15));
+  border: 3px solid rgb(136, 255, 0);
+}
 
+button#add-reminder:hover {
+  background: linear-gradient(rgb(87, 118, 25),rgb(29, 113, 19));
+  border: 1px solid rgb(139, 214, 0);
+}
 button:hover {
   background: var(--color-button-hover);
-  border: 1px solid rgb(255, 0, 251);
+  border: 1px solid rgb(133, 0, 119);
 }
 
 #reminder-list {
   background: var(--color-reminder-list-bg);
-  padding: 1rem;
+  padding: .5rem 1rem;
   border: 1px solid rgb(102, 102, 102);
   border-radius: var(--border-radius);
   margin: 0.2rem;
   text-align: center;
-  color: #000;
+  color: #4c4d4d;
 }
 
 #reminders li {
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
+  padding: .1rem 1rem;
   border-radius: var(--border-radius);
   width: 100%;
   transition: var(--transition);
@@ -202,7 +221,7 @@ button:hover {
   text-transform: uppercase;
   font-weight: 600;
   background: var(--color-future);
-  border: 1px solid rgb(3, 159, 6);
+  border: 1px solid rgb(77, 173, 79);
   color: rgb(41, 41, 41);
 }
 
@@ -262,13 +281,13 @@ button:hover {
   background: var(--color-reminder-bg);
   padding: 10px;
   border: .5px solid rgba(85, 85, 85, 0.758);
-  border-radius: var(--border-radius);
   margin: 0.2rem;
   width: auto;
   word-wrap: break-word;
   max-width: 90%;
   box-shadow: var(--box-shadow);
   text-transform: capitalize;
+  font-size: clamp(11px, 1.5vw, 18px);
 }
 
 button.eliminar {
@@ -288,4 +307,11 @@ button.eliminar {
 
 button.eliminar:hover {
   transform: scale(1.1);
+}
+
+strong {
+  background-color: #bf02c6;
+  padding: .2rem 1rem;
+  border-radius: 10px;
+  font-size: 1.4rem;
 }

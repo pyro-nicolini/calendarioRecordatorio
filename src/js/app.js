@@ -228,42 +228,24 @@ importButton.addEventListener("click", () => {
 
 // Función para cambiar de mes
 document.getElementById("prev-month").addEventListener("click", () => {
-  currentDate.setMonth(currentDate.getMonth() - 1);
-  updateCalendar();
+  changeMonth(-1);
 });
 
 document.getElementById("next-month").addEventListener("click", () => {
-  currentDate.setMonth(currentDate.getMonth() + 1);
+  changeMonth(1);
+});
+
+// Inicializamos el calendario al cargar la página
+document.addEventListener("DOMContentLoaded", function() {
   updateCalendar();
 });
 
-// Inicializamos el calendario
-updateCalendar();
+function changeMonth(offset) {
+  let year = currentDate.getFullYear();
+  let month = currentDate.getMonth() + offset;
 
-
-
-/*--------EJEMPLO DE COMO QUEDA GUARDADO----
-
-{
-  "2025-01-11": [
-    { "date": "2025-01-11", "text": "asdasdasd" },
-    { "date": "2025-01-11", "text": "adwdawdaw" },
-    { "date": "2025-01-11", "text": "dawdawdaw" },
-    { "date": "2025-01-11", "text": "dawdawd" }
-  ],
-  "2025-01-12": [
-    { "date": "2025-01-12", "text": "adwdadsa" },
-    { "date": "2025-01-12", "text": "dawdawdaw" }
-  ],
-  "2025-01-10": [{ "date": "2025-01-10", "text": "awdasdadw" }],
-  "2025-01-30": [
-    { "date": "2025-01-30", "text": "adWDawd" },
-    { "date": "2025-01-30", "text": "awdsDwd" }
-  ],
-  "2025-01-31": [
-    { "date": "2025-01-31", "text": "awdawdsad" },
-    { "date": "2025-01-31", "text": "awdda" }
-  ]
+  // Crear una nueva fecha con el día 1 para evitar saltos inesperados
+  currentDate = new Date(year, month, 1);
+  
+  updateCalendar();
 }
-
------ */
